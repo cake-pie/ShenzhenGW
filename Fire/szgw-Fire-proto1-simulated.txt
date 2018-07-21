@@ -1,0 +1,177 @@
+[name] G&W FR-27 Fire - Simulated
+[puzzle] SzSandbox
+
+[traces] 
+......................
+..............94......
+..............A.......
+...94.........A.......
+...A..1D4....1F4.14...
+...A...A......A..14...
+...34..A......34......
+..154.16..............
+......................
+......................
+......................
+..............14.14...
+.................14...
+......................
+
+[chip] 
+[type] UC4X
+[x] 12
+[y] 1
+[code] 
+@ mov 4 x3
+@ slp 100
+  mov 7 x3
+  slp 160
+  mov 5 x3
+  slp 120
+  mov 7 x3
+  slp 160
+
+[chip] 
+[type] UC6
+[x] 15
+[y] 1
+[code] 
+@ mov 2 x3
+  mov x1 acc
+l:sub 1
+  mov 71 x2
+  slp 1
+  mov 2 x3
+  slp 19
+  tgt acc 0
++ jmp l
+  mov 76 x2
+  slp 6
+  mov 2 x3
+  slp 14
+
+[chip] 
+[type] FMB
+[x] 18
+[y] 1
+[rotated] true
+
+[chip] 
+[type] NOTE
+[x] 18
+[y] 3
+[code] 
+audio test
+
+[chip] 
+[type] RNG
+[x] 1
+[y] 6
+
+[chip] 
+[type] UC4
+[x] 4
+[y] 6
+[code] 
+  tlt acc 8
+- sub 8
+  mul 2
+  mov acc x0
+  tlt p0 33
++ add 1
++ mov 17 x1
+- mov -17 x1
+  slp 20
+
+[chip] 
+[type] LCDC2
+[x] 8
+[y] 6
+[custom-screen] 
+gwfire-320
+
+[chip] 
+[type] UC4
+[x] 15
+[y] 6
+[code] 
+@ mov 59 x0
+@ mov 60 x0
+@ mov 61 x0
+@ mov 62 x0
+@ mov 63 x0
+
+[chip] 
+[type] UC6
+[x] 4
+[y] 8
+[code] 
+  slx x0
+  mov x0 acc
+  tlt acc 8
++ mov -1 x3
+- mov 1 x3
+- sub 8
+  tlt acc 4
++ mov -12 x3
+- mov 12 x3
+- sub 4
+  tlt acc 2
++ mov -13 x3
+- mov 13 x3
+
+[chip] 
+[type] UC4X
+[x] 15
+[y] 8
+[code] 
+  mov x2 acc
+  mov acc x0
+  mul -1
+  slp 20
+  mov acc x0
+  teq x3 22
++ mov 0 x3
+
+[chip] 
+[type] BANKXL
+[x] 18
+[y] 8
+[rom] 
+31,34,40,49,51,47,39,32,30,35,42,43,50,44,38,33,37,45,52,46,41,48,0,0,0,0,0,0,0,0,0,0,0
+
+[chip] 
+[type] UC6
+[x] 15
+[y] 10
+[code] 
+@ mov 53 x0
+@ slp 111
+  mov -53 x0
+  mov 55 x0
+  slp 152
+  mov -55 x0
+  mov 54 x0
+  slp 122
+  mov -54 x0
+  mov 55 x0
+  slp 39
+  mov -55 x0
+  mov 53 x0
+  slp 127
+
+[chip] 
+[type] NOTE
+[x] 4
+[y] 11
+[code] 
+RNG-driven smoke
+billows outwards
+
+[chip] 
+[type] NOTE
+[x] 18
+[y] 11
+[code] 
+simulated gameplay
+

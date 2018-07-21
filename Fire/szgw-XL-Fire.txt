@@ -1,0 +1,487 @@
+[name] G&W FR-27 Fire
+[puzzle] SzSandbox2
+
+[traces] 
+............................................
+..95555555D55555554954......................
+..34....14A....1554A........................
+..94954.14A15555554A14......................
+..A.A15C..A15C.8.1CA1495555554.154..........
+..34A..A..354A16..A354A1555C15C15C..........
+.954B54A154..A94..A954A1554A..A..A..........
+.A14A15E155556A...AA.975554A..A..A..........
+.354A..A148...3555EA1694.15E94A..A954.......
+..94354A15E.......AA15E.954AA.354AA1C.......
+..A..15614A.......AA..34A156A.954AA.A.......
+..A.....1CA...0...AA95543D556.A.16A16.......
+..35555556A...14..AA2.95CA..14A.94354.......
+..........A...14.16354356A..156174..........
+..........3555D4.1554..156.....154..........
+..............355555D4.14.14................
+....................35554.14................
+............................................
+............................................
+............................................
+............................................
+............................................
+............................................
+............................................
+............................................
+............................................
+............................................
+............................................
+
+[chip] 
+[type] UC6
+[x] 24
+[y] 11
+[code] 
+  slx x1
+  teq acc 0
++ mov 2 x3
+  mov x1 dat
+  tgt dat acc
++ tgt p0 70
++ mov dat acc
++ mov p0 x2
+  teq dat 10
++ sub 10
+- sub 1
+
+[chip] 
+[type] FMB
+[x] 27
+[y] 11
+[rotated] true
+
+[chip] 
+[type] UC6
+[x] 21
+[y] 12
+[code] 
+  slx x0
+  teq x0 76#fall
++ mov 10 x2
++ gen p1 20 0
++ mov 10 x2
++ gen p1 20 0
++ jmp z
+  teq p0 76#bounce
++ mov 1 x3
++ mov 5 x2
+- mov 1 x2 #other
+  slp 1    #sleep
+z:mov null x0
+
+[chip] 
+[type] UC6
+[x] 15
+[y] 13
+[code] 
+# L/R control
+  slx x2
+  tcp x2 59
+- jmp n #newgame
++ mov x0 null
+  mov x0 x1
+  mul -1
+  mov acc x3
+  jmp l
+n:mov 0 x1
+l:mov x0 acc
+  mov acc x3
+  mov x0 p0
+
+[chip] 
+[type] BRIDGE
+[x] 20
+[y] 13
+
+[chip] 
+[type] UC6
+[x] 29
+[y] 13
+[code] 
+  slx x0
+  mov x0 dat
+  tlt dat 10
++ jmp o
+  tlt dat 100
++ jmp t
+h:mov dat acc
+  dgt 2
+  mov acc x3
+t:mov dat acc
+  dgt 1
+  mov acc x3
+o:mov dat x2
+
+[chip] 
+[type] UC4X
+[x] 33
+[y] 13
+[code] 
+  slx x1
+  mov x1 acc
+  dgt 0
+  mov acc x0
+
+[chip] 
+[type] BANK
+[x] 12
+[y] 14
+[rom] 
+53,23,0,4,55,13,0,8,54,5,4,8,0,0
+
+[chip] 
+[type] UC6
+[x] 26
+[y] 14
+[code] 
+  slx x0
+  tgt x0 0
++ add 1
+- mov 0 acc
+  
+  mov 0 x2
+  tlt acc 100
++ mov 7 x2
++ tlt acc 10
++ mov 14 x2
+o:mov acc x3
+
+[chip] 
+[type] UC6
+[x] 23
+[y] 15
+[code] 
+# L/R input
+z:slx x3
+  mov null x1
+r:mov x0 dat
+  tgt dat 58
++ tlt dat 61
++ teq p0 0
++ mov dat x1
+  teq dat -999
+- jmp r
+  slp 1
+  teq p1 0
+- jmp r
+
+[chip] 
+[type] UC4X
+[x] 33
+[y] 15
+[code] 
+  slx x1
+  mov x1 acc
+  mul 3
+  mov acc x3
+  mov x2 x0
+  mov x2 x0
+  mov x2 x0
+
+[chip] 
+[type] UC6
+[x] 6
+[y] 16
+[code] 
+# bounce
+  slx x2
+  mov p1 x0
+  mov x1 dat
+  tgt dat 0
++ mov p1 acc
++ sub 2
++ mov acc x0
++ mov dat x1
++ mov p1 x0
++ mov -1 x1
+  mov x2 p1
++ mov 76 p1
+  mov null x3
+
+[chip] 
+[type] LCDC2
+[x] 15
+[y] 16
+[custom-screen] 
+gwfire-320
+
+[chip] 
+[type] BANKXL
+[x] 29
+[y] 16
+[rom] 
+2,6,7,14,21,18,27,3,8,9,15,22,19,28,4,10,11,16,23,20,29,0,0,0,0,0,0,0,0,0,0,0,0
+
+[chip] 
+[type] UC6
+[x] 3
+[y] 17
+[code] 
+# anim
+  slx x0
+  mov x0 x3
+  mov 0 dat
+l:teq x2 0
++ mov x3 acc
++ sub 2
++ mov acc x3
++ mov 5 x2
++ mov x2 null
++ mov 71 dat
+  tlt x3 29
++ jmp l
+  mov dat x1
+
+[chip] 
+[type] BRIDGE
+[x] 9
+[y] 17
+
+[chip] 
+[type] BANKXL
+[x] 33
+[y] 17
+[rom] 
+111,11,199,1,1,99,101,110,199,101,101,199,11,101,99,110,101,199,110,111,199,101,1,99,111,111,199,111,101,199,0,0,0
+
+[chip] 
+[type] UC4
+[x] 23
+[y] 18
+[code] 
+# start btn
+0:teq x0 62
+- slp 1
+- jmp 0
+  mov null x1
+1:slp 1
+  teq p1 0
+- jmp 1
+  slp 50
+
+[chip] 
+[type] UC6
+[x] 6
+[y] 19
+[code] 
+# fall
+  slx x2
+  mov x2 dat
+  mov  4 x0
+  tgt x1 0
++ mov 76 dat
+  mov 12 x0
+  tgt x1 0
++ mov 76 dat
+  mov 22 x0
+  tgt x1 0
++ mov 76 dat
+  mov dat p1
+  mov dat x3
+
+[chip] 
+[type] BRIDGE
+[x] 10
+[y] 19
+
+[chip] 
+[type] UC6
+[x] 26
+[y] 19
+[code] 
+0:slx x2
+  mov 100 p0
+  mov null x0
+1:slx x0
+  mov 5 x1
+  mov 24 x1
+  mov x0 null
+2:slx x0
+  mov 25 x1
+  mov x0 null
+3:slx x0
+  mov 0 p0
+  mov 26 x1
+  mov x0 null
+
+[chip] 
+[type] RNG
+[x] 1
+[y] 20
+
+[chip] 
+[type] UC6
+[x] 3
+[y] 20
+[code] 
+  slx x0
+  mov 04 x3 # c f
+  mov -1 x2 # l a
+  mov 12 x3 # e l
+  mov -1 x2 # a l
+  mov 22 x3 # r
+  mov -1 x2 #
+# random spawn
+  mov 28 x3
+@ mov 0 x2
+  tlt x2 -5
++ mov 28 x3
++ mov p0 x2
+  mov x0 x1
+
+[chip] 
+[type] UC6
+[x] 21
+[y] 20
+[code] 
+@ mov 999 x2
+  slx x3
+  mov -999 x2
+  mov x3 x0
+  
+l:mov x0 acc
+  teq acc 76
++ mov null x3
+  mov acc x1
+  slx x1 #sleep
+  mov x1 null
+  mov p1 x0
+  teq p1 0
+- jmp l
+
+[chip] 
+[type] UC6
+[x] 12
+[y] 21
+[code] 
+  slx x1
+  mov 59 x2
+  mov 60 x2
+  mov 61 x2
+  mov 62 x2
+  mov 63 x2
+  mov -56 x2
+  mov -57 x2
+  mov -58 x2
+  slx x0
+  mov x0 acc
+  mov x0 null
+  mov acc x3
+
+[chip] 
+[type] UC6
+[x] 32
+[y] 21
+[code] 
+z:slx x1
+  mov x1 dat
+  mov dat acc
+  dgt 2
+  mov acc x0
+  mov dat acc
+  dgt 1
+  teq acc 9
++ jmp z
+  mov acc x0
+  mov dat acc
+  dgt 0
+  mov acc x0
+
+[chip] 
+[type] UC4X
+[x] 29
+[y] 22
+[code] 
+  slx x3
+  mov x1 acc
+  teq x3 0
++ mul -1
+  mov acc x0
+
+[chip] 
+[type] UC6
+[x] 3
+[y] 23
+[code] 
+# decrement
+  slx x0
+  mov x0 x3
+l:mov x2 acc
+  sub 1
+  mov acc dat
+  mov x3 acc
+  sub 1
+  mov acc x3
+  mov dat x2
+  tlt x3 29
++ jmp l
+  mov null x1
+
+[chip] 
+[type] RAMXL
+[x] 6
+[y] 23
+
+[chip] 
+[type] UC6
+[x] 9
+[y] 23
+[code] 
+# display
+  slx x2
+l:mov x0 acc
+  tcp acc 0
++ mov 1 x3
+- mov 0 x3
+  teq acc 0
++ mov -1 x3
+  tlt x1 30
++ jmp l
+  mov 0 x1
+  mov null x2
+
+[chip] 
+[type] BRIDGE
+[x] 15
+[y] 23
+
+[chip] 
+[type] UC4X
+[x] 18
+[y] 23
+[code] 
+# display
+  slx x0
+l:mov x2 acc
+  mul x0
+  mov acc x1
+  tlt x3 30
++ jmp l
+  mov 0 x3
+
+[chip] 
+[type] BANKXL
+[x] 21
+[y] 23
+[rom] 
+48,41,46,52,57,52,45,37,33,38,44,50,56,50,43,42,35,30,32,39,47,51,58,51,49,40,34,31,0,36,0,0,0
+
+[chip] 
+[type] UC4X
+[x] 18
+[y] 25
+[code] 
+  slx x3
+  mov x3 null
+# start #
+l:mov null x0
+  mov x1 x3
+  slx x3 #sleep
+  teq x3 0
+- jmp l
+# game over #
+

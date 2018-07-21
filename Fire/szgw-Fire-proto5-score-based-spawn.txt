@@ -1,0 +1,266 @@
+[name] G&W FR-27 Fire - Score-based Spawn
+[puzzle] SzSandbox
+
+[traces] 
+......................
+............15555555C.
+...1554954..154.....A.
+...1554A1555554954..A.
+.....14A15555C.A15C.A.
+.......A.....34B54A.A.
+...1554B54...94A15E.A.
+...1554A154.174B54A.A.
+.....14A.155C94A15E16.
+.......A....A34A..A1C.
+.....14A....A14354A.A.
+.....14354..354.156.A.
+..14....154..15555556.
+......................
+
+[chip] 
+[type] BTN
+[x] 1
+[y] 1
+
+[chip] 
+[type] UC6
+[x] 3
+[y] 1
+[code] 
+0:tgt p1 0
+- slp 1
+- jmp 0
+  mov 0 acc
+  mov acc x3
+  
+1:teq p0 100
++ add 1
++ mov acc x3
+  tgt p1 0
++ slp 1
++ jmp 1
+
+[chip] 
+[type] UC4
+[x] 6
+[y] 1
+[code] 
+  slx x0
+  mov 80 x1
+  mov x0 x1
+  mov x1 p1
+
+[chip] 
+[type] MATH
+[x] 10
+[y] 1
+
+[chip] 
+[type] BRIDGE
+[x] 13
+[y] 1
+
+[chip] 
+[type] UC6
+[x] 14
+[y] 2
+[code] 
+0:slx x0
+  teq p0 5
++ mov 29 x3
++ mov 5 x2
+  mov x0 x1
+- jmp 0
+1:slx x0
+  teq p0 0
++ mov 25 x3
++ mov 5 x2
++ mov 29 x3
++ mov 0 x2
+  mov x0 x1
+- jmp 1
+
+[chip] 
+[type] SWH
+[x] 6
+[y] 3
+
+[chip] 
+[type] UC6
+[x] 17
+[y] 4
+[code] 
+# anim
+  slx x2
+  mov x2 x0
+  mov 0 dat
+l:teq x1 0
++ mov x0 acc
++ sub 2
++ mov acc x0
++ mov 5 x1
++ mov x1 null
++ mov 71 dat
+  tlt x0 29
++ jmp l
+  mov dat x3
+
+[chip] 
+[type] BANKXL
+[x] 1
+[y] 5
+[rom] 
+214,203,192,182,172,162,153,144,135,127,119,111,104,97,90,84,78,72,67,62,57,53,49,45,42,39,36,34,32,30,29,28,27
+
+[chip] 
+[type] RNG
+[x] 4
+[y] 5
+
+[chip] 
+[type] UC6
+[x] 6
+[y] 5
+[code] 
+  slx x3
+  mov x3 null
+  
+  mov p1 x1
+  mov x0 x3
+  
+  mov p0 acc
+  dgt 1
+  mov acc dat
+  mov p0 acc
+  dgt 0
+  add dat
+  add 2
+  mov acc x3
+
+[chip] 
+[type] UC6
+[x] 10
+[y] 5
+[code] 
+  teq acc 1
+  slx x3
+- mov x3 null
++ tlt x3 -5
++ mov 0 p0
+@ teq 0 0
++ mov null x1
++ mov x1 acc
++ mov x1 dat
+  teq acc dat
++ mov 5 p0
+  tgt acc 1
++ sub 1
+
+[chip] 
+[type] UC4X
+[x] 14
+[y] 5
+[code] 
+  slx x0
+  mov 04 x3 # c f
+  mov -1 x2 # l a
+  mov 12 x3 # e l
+  mov -1 x2 # a l
+  mov 22 x3 # r
+  mov -1 x2 #
+  mov null x1
+
+[chip] 
+[type] UC4X
+[x] 14
+[y] 7
+[code] 
+  slx x0
+  mov 28 x3
+@ mov 0 x2
+  tlt x2 -5
++ mov 28 x3
++ mov x0 x2
+- mov x0 null
+  mov 26 x3
+  mov x2 x1
+
+[chip] 
+[type] NOTE
+[x] 17
+[y] 7
+[code] 
+29 - L3 on/off
+28 - next L4 wait
+27-23
+*22* *fall*
+21-13
+*12* *fall*
+11-05
+*04* *fall*
+03-00
+
+[chip] 
+[type] BANKXL
+[x] 1
+[y] 9
+[rom] 
+94,82,73,64,58,52,46,40,37,34,31,28,25,22,19,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0,0
+
+[chip] 
+[type] RNG
+[x] 4
+[y] 9
+
+[chip] 
+[type] UC6
+[x] 6
+[y] 9
+[code] 
+  slx x3
+  mov x3 null
+  
+  mov p0 acc
+  dgt 1
+  mul 2
+  mov acc dat
+  mov p0 acc
+  dgt 0
+  add dat
+  mov p1 x1
+  add x0
+  mov acc x2
+
+[chip] 
+[type] UC6
+[x] 14
+[y] 9
+[code] 
+  slx x0
+  mov x0 x3
+l:mov x2 acc
+  sub 1
+  mov acc dat
+  mov x3 acc
+  sub 1
+  mov acc x3
+  mov dat x2
+  tlt x3 29
++ jmp l
+  mov null x1
+
+[chip] 
+[type] RAMXL
+[x] 17
+[y] 9
+
+[chip] 
+[type] UC4X
+[x] 10
+[y] 11
+[code] 
+# simulated #
+  mov null x2
+  mov x3 null
+  slp 1
+

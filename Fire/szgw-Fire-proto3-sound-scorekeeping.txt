@@ -1,0 +1,252 @@
+[name] G&W FR-27 Fire - Sound/Scorekeeping
+[puzzle] SzSandbox
+
+[traces] 
+......................
+..15C15555554.1555C...
+..94A.....954.1554A...
+..B4A.....A.955554A...
+..A.A1555CA1694.15E1C.
+..A.A....AA15E.954A.A.
+..34A15C.AA..34A156.A.
+..14354A.AA955435D556.
+.....14A.AA2.95C.A....
+.....14A16354356.A....
+.....15E1554..1556....
+..14...3555D4.14.14...
+...........35554.14...
+......................
+
+[chip] 
+[type] UC6
+[x] 15
+[y] 1
+[code] 
+  slx x1
+  teq acc 0
++ mov 2 x3
+  mov x1 dat
+  tgt dat acc
++ tgt p0 70
++ mov dat acc
++ mov p0 x2
+  teq dat 10
++ sub 10
+- sub 1
+
+[chip] 
+[type] FMB
+[x] 18
+[y] 1
+[rotated] true
+
+[chip] 
+[type] RNG
+[x] 1
+[y] 2
+
+[chip] 
+[type] UC4
+[x] 3
+[y] 2
+[code] 
+# simulated #
+  mov 0 p1
+  tlt p0 7 #bounce
++ mov 76 p1
++ jmp z
+- tlt p0 25
++ mov 71 p1 #anim
+z:slp 1
+
+[chip] 
+[type] UC6
+[x] 12
+[y] 2
+[code] 
+  slx x0
+  teq x0 76#fall
++ mov 10 x2
++ gen p1 20 0
++ mov 10 x2
++ gen p1 20 0
++ jmp z
+  teq p0 76#bounce
++ mov 1 x3
++ mov 5 x2
+- mov 1 x2 #other
+  slp 1    #sleep
+z:mov null x0
+
+[chip] 
+[type] UC6
+[x] 6
+[y] 3
+[code] 
+# L/R control
+  slx x2
+  tcp x2 59
+- jmp n #newgame
++ mov x0 null
+  mov x0 x1
+  mul -1
+  mov acc x3
+  jmp l
+n:mov 0 x1
+l:mov x0 acc
+  mov acc x3
+  mov x0 p0
+
+[chip] 
+[type] BRIDGE
+[x] 11
+[y] 3
+
+[chip] 
+[type] BANK
+[x] 3
+[y] 4
+[rom] 
+53,23,0,4,55,13,0,8,54,5,4,8,0,0
+
+[chip] 
+[type] UC6
+[x] 14
+[y] 5
+[code] 
+# L/R input
+z:slx x3
+  mov null x1
+r:mov x0 dat
+  tgt dat 58
++ tlt dat 61
++ teq p0 0
++ mov dat x1
+  teq dat -999
+- jmp r
+  slp 1
+  teq p1 0
+- jmp r
+
+[chip] 
+[type] UC4
+[x] 18
+[y] 5
+[code] 
+  slx x0
+  tgt x0 0
++ add 1
+- mov 0 acc
+# mov acc null
+
+[chip] 
+[type] RNG
+[x] 1
+[y] 6
+
+[chip] 
+[type] UC4
+[x] 3
+[y] 6
+[code] 
+# simulated #
+  slx x0
+  mov x0 null
+  tlt p0 1 #fall
++ mov 76 p1
++ mov 76 x1
+- mov 0 p1
+- mov 0 x1
+
+[chip] 
+[type] LCDC2
+[x] 6
+[y] 6
+[custom-screen] 
+gwfire-320
+
+[chip] 
+[type] UC4
+[x] 14
+[y] 8
+[code] 
+# start btn
+0:teq x0 62
+- slp 1
+- jmp 0
+  mov null x1
+1:slp 1
+  teq p1 0
+- jmp 1
+  slp 50
+
+[chip] 
+[type] UC4X
+[x] 3
+[y] 9
+[code] 
+  slx x0
+  mov -56 x2
+  mov -57 x2
+  mov -58 x2
+  mov 59 x2
+  mov 60 x2
+  mov 61 x2
+  mov 62 x2
+  mov 63 x2
+
+[chip] 
+[type] UC6
+[x] 17
+[y] 9
+[code] 
+0:slx x2
+  mov 100 p0
+  mov null x0
+1:slx x0
+  mov 5 x1
+  mov 24 x1
+  mov x0 null
+2:slx x0
+  mov 25 x1
+  mov x0 null
+3:slx x0
+  mov 0 p0
+  mov 26 x1
+  mov x0 null
+
+[chip] 
+[type] UC6
+[x] 12
+[y] 10
+[code] 
+@ mov 999 x2
+  slx x3
+  mov -999 x2
+  mov x3 x0
+  
+l:mov x0 acc
+  teq acc 76
++ mov null x3
+  mov acc x1
+  slx x1 #sleep
+  mov x1 null
+  mov p1 x0
+  teq p1 0
+- jmp l
+
+[chip] 
+[type] UC4X
+[x] 3
+[y] 11
+[code] 
+  slx x3
+  mov x3 null
+# start #
+l:mov null x1
+  mov x0 x3
+  slx x3 #sleep
+  teq x3 0
+- jmp l
+# game over #
+
